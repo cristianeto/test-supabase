@@ -12,6 +12,8 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
     "use server";
     const email = formData.get("email")?.toString();
     const password = formData.get("password")?.toString();
+    const firstname = formData.get("firstname")?.toString();
+    const lastname = formData.get("lastname")?.toString();
     const supabase = createClient();
     const origin = headers().get("origin");
 
@@ -23,6 +25,10 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
       email,
       password,
       options: {
+        data: {
+          first_name: firstname,
+          last_name: lastname,
+        },
         emailRedirectTo: `${origin}/auth/callback`,
       },
     });
@@ -81,6 +87,10 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
         <div className="mt-8 flex flex-col gap-2 [&>input]:mb-3">
           <Label htmlFor="email">Email</Label>
           <Input name="email" placeholder="you@example.com" required />
+          <Label htmlFor="firstname">Firstname</Label>
+          <Input name="firstname" placeholder="Jhon" required />
+          <Label htmlFor="lastname">Lastname</Label>
+          <Input name="lastname" placeholder="Lennon" required />
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
