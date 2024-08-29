@@ -9,7 +9,8 @@ export default async function AuthButton() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user: ", user)
+  console.log('user: ', user)
+
   const signOut = async () => {
     "use server";
 
